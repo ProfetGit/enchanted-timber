@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 # Usage: dev/test/run.sh <mc-version> [workdir] [harness args...]
 # Boots a headless server from the local ModrinthApp jar with this add-on and Timber (built from ../Timber),
-# then runs EnchantedTimberTest. KEEP_WORLD=1 reuses the workdir's world and datapacks as they are (restart tests).
+# then runs EnchantedTimberTest. Test runs also add Timber 1.0.0 (from git, disabled by the tests).
+# KEEP_WORLD=1 reuses the workdir's world and datapacks as they are (restart tests).
 set -euo pipefail
 
 VER=${1:?usage: run.sh <mc-version> [workdir] [args...]}
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 BASE=${TIMBER_DIR:-$ROOT/../Timber}
+OLD_REF=${TIMBER_OLD_REF:-4c7ea27}
 WORK=${2:-$ROOT/dev/test/.work/$VER}
 shift $(( $# >= 2 ? 2 : 1 ))
 META=${MODRINTH_META:-$HOME/.local/share/ModrinthApp/meta}
@@ -40,6 +42,10 @@ if [ -z "${KEEP_WORLD:-}" ]; then
   rm -rf "$WORK"
   mkdir -p "$WORK/world/datapacks"
   cp "$ZIP" "$BASEZIP" "$WORK/world/datapacks/"
+  if [ "${1:-}" != explore ]; then
+    mkdir -p "$WORK/world/datapacks/timber-1.0.0"
+    git -C "$BASE" archive "$OLD_REF" pack | tar -x -C "$WORK/world/datapacks/timber-1.0.0" --strip-components=1
+  fi
   for extra in ${EXTRA_PACKS:-}; do cp -r "$extra" "$WORK/world/datapacks/"; done
   echo "eula=true" > "$WORK/eula.txt"
   cat > "$WORK/server.properties" <<'EOF'

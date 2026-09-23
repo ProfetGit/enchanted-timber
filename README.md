@@ -4,7 +4,7 @@
 
 Enchanted Timber is an add-on for **[Timber](https://modrinth.com/datapack/vanilla-timber)**, the vanilla data pack for **Minecraft Java 26.2 and 26.3**. It adds a new axe enchantment, **Timber**. Only an axe that has it brings the whole tree down. Without it, an axe chops one log at a time, as in vanilla.
 
-It needs **Timber 1.0.0 or newer**. Install both.
+It needs **Timber 1.1.0 or newer**. Install both.
 
 ## Why this add-on?
 
@@ -16,7 +16,7 @@ It needs **Timber 1.0.0 or newer**. Install both.
 
 **One zip, server-side only.** Like Timber, it needs no mods, no resource pack, no client install and no experimental features.
 
-**Tested, not hoped.** Every release is checked by 60 automated tests on real 26.2 and 26.3 servers, running together with Timber: a simulated player chops trees with and without the enchantment, and the tests check the anvil, the enchanting table, `/enchant`, the loot and trade tags, and what happens when Timber is missing.
+**Tested, not hoped.** Every release is checked by 60 automated tests on real 26.2 and 26.3 servers, running together with Timber: a simulated player chops trees with and without the enchantment, and the tests check the anvil, the enchanting table, `/enchant`, the loot and trade tags, and what happens when Timber is missing or out of date.
 
 ## How to use
 
@@ -53,7 +53,7 @@ All of Timber's commands and settings work as before. See its page.
 
 ## Installation
 
-You need both zips: **Timber 1.0.0+** and **Enchanted Timber**.
+You need both zips: **Timber 1.1.0+** and **Enchanted Timber**.
 
 **Singleplayer**
 - New world: under **More → Data Packs**, drag both `.zip` files into the window.
@@ -65,12 +65,12 @@ Don't unzip the files.
 
 **`/reload` is not enough for this add-on.** The game registers enchantments only when a world loads. If you add the pack with `/reload`, it tells you in chat to reopen the world, and until you do, felling works without the enchantment. Timber itself keeps working the whole time.
 
-If Timber is missing, the add-on says so in chat with a download link. Until you fix that, the enchantment does nothing.
+If Timber is missing or older than 1.1.0, the add-on says so in chat with a download link. Until you fix that, the enchantment does nothing.
 
 ## Compatibility
 
 - One zip supports Minecraft Java **26.2 and 26.3**.
-- Needs **Timber 1.0.0 or newer**.
+- Needs **Timber 1.1.0 or newer**. With Timber 1.0.0 the enchantment does nothing, and every axe fells trees as before.
 - Everything lives in the `enchanted_timber` namespace. It adds to the vanilla `#minecraft:non_treasure` and `#minecraft:tooltip_order` enchantment tags and the `#minecraft:load` function tag, and to Timber's add-on hooks. It doesn't replace any files.
 
 ## Good to know

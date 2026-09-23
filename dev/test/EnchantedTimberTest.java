@@ -298,7 +298,7 @@ class Scenarios {
     static final String ENCH = "enchanted_timber:timber";
     static final String HAS = "[minecraft:enchantments~[{enchantments:\"" + ENCH + "\"}]]";
     static final String AXE = "minecraft:iron_axe", EAXE = AXE + "[minecraft:enchantments={\"" + ENCH + "\":1}]";
-    static final String BASE = baseZip(), ADDON = "file/EnchantedTimber-1.0.0.zip";
+    static final String BASE = baseZip(), OLD = "file/timber-1.0.0", ADDON = "file/EnchantedTimber-1.0.0.zip";
 
     static List<String> cmd(String c) { return EnchantedTimberTest.cmd(c); }
     static List<String> chat() { return EnchantedTimberTest.chat(); }
@@ -414,8 +414,10 @@ class Scenarios {
         cmd("gamerule block_drops true");
         cmd("gamemode survival TimberTester");
         ticks(80);
+        pack("disable", OLD);
         List<String> packs = cmd("datapack list enabled");
-        check("packs: Timber + add-on enabled", packs.toString().contains(BASE) && packs.toString().contains(ADDON), packs.toString());
+        check("packs: Timber 1.1.0 + add-on enabled, 1.0.0 off", packs.toString().contains(BASE) && packs.toString().contains(ADDON)
+            && !packs.toString().contains(OLD), packs.toString());
         chat();
         ticks(50);
         List<String> c = chat();
@@ -557,7 +559,7 @@ class Scenarios {
         pack("disable", BASE);
         c = chat();
         info("chat without Timber: " + c);
-        check("warns when Timber is missing", score("#problem") == 1 && c.stream().anyMatch(m -> isWarning(m) && m.contains("needs the Timber data pack") && m.contains("{clicks=1}")),
+        check("warns when Timber is missing", score("#problem") == 1 && c.stream().anyMatch(m -> isWarning(m) && m.contains("version 1.1.0 or newer") && m.contains("{clicks=1}")),
             c.toString());
         ticks(50);
         c = chat();
@@ -573,18 +575,19 @@ class Scenarios {
         check("warning stops once Timber is back", score("#problem") == 0 && c.stream().noneMatch(Scenarios::isWarning), c.toString());
         check("gate works again", fells(AXE) == 0 && fells(EAXE) == 1, "");
 
-        // 8. Timber's data without Timber's API (version_id missing)
-        cmd("data remove storage timber:meta version_id");
-        cmd("function enchanted_timber:api/loaded");
-        cmd("scoreboard players operation #load enchanted_timber.data = #base enchanted_timber.data");
-        cmd("function enchanted_timber:check");
+        // 8. Timber 1.0.0 (no add-on support)
+        pack("disable", BASE);
+        pack("enable", OLD);
+        List<String> ver = cmd("data get storage timber:meta version");
         c = chat();
-        check("warns when Timber has no add-on support", score("#problem") == 1 && c.stream().anyMatch(Scenarios::isWarning), c.toString());
-        cmd("reload");
-        ticks(5);
+        check("warns with Timber 1.0.0", ver.toString().contains("1.0.0") && score("#problem") == 1 && c.stream().anyMatch(Scenarios::isWarning), ver + " " + c);
+        info("Timber 1.0.0 + add-on, unenchanted axe: " + (fells(AXE) == 1 ? "fells (no hooks)" : "single log"));
+        pack("disable", OLD);
+        pack("enable", BASE);
         chat();
         ticks(45);
-        check("back to normal after /reload", score("#problem") == 0 && chat().stream().noneMatch(Scenarios::isWarning), "problem=" + score("#problem"));
+        check("back on 1.1.0: no warning, gated", score("#problem") == 0 && chat().stream().noneMatch(Scenarios::isWarning) && fells(AXE) == 0,
+            "problem=" + score("#problem"));
 
         // 9. add-on switched off with /datapack disable (no restart)
         pack("disable", ADDON);

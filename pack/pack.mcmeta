@@ -3,7 +3,7 @@
     "description": [
       {"text": "Enchanted Timber", "color": "light_purple", "bold": true},
       {"text": " – felling needs an enchantment\n", "color": "gray"},
-      {"text": "v1.0.0 by Profet · needs Timber 1.0.0+", "color": "dark_gray"}
+      {"text": "v1.0.0 by Profet · needs Timber 1.1.0+", "color": "dark_gray"}
     ],
     "min_format": [107, 1],
     "max_format": 121
