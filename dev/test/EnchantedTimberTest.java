@@ -47,8 +47,7 @@ public class EnchantedTimberTest {
     static final List<String> failures = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        net.minecraft.server.Main.main(new String[] {"--nogui"});
-        server = findServer();
+        server = boot();
         long deadline = System.currentTimeMillis() + 180_000;
         while (!server.isReady()) {
             if (System.currentTimeMillis() > deadline) throw new IllegalStateException("server never became ready");
@@ -72,6 +71,24 @@ public class EnchantedTimberTest {
             Thread.sleep(3000);
             System.exit(failed == 0 ? 0 : 1);
         }
+    }
+
+    /** Vanilla by default; -Dharness.main=<class> boots a plugin platform in-process instead (PLATFORM= in run.sh). */
+    static MinecraftServer boot() throws Exception {
+        String main = System.getProperty("harness.main");
+        if (main == null) {
+            net.minecraft.server.Main.main(new String[] {"--nogui"});
+            return findServer();
+        }
+        Class.forName(main).getMethod("main", String[].class).invoke(null, (Object) new String[] {"--nogui"});
+        java.lang.reflect.Method get = MinecraftServer.class.getMethod("getServer");
+        long deadline = System.currentTimeMillis() + 180_000;
+        Object s;
+        while ((s = get.invoke(null)) == null) {
+            if (System.currentTimeMillis() > deadline) throw new IllegalStateException("server never started");
+            Thread.sleep(50);
+        }
+        return (MinecraftServer) s;
     }
 
     @SuppressWarnings("unchecked")
@@ -114,15 +131,24 @@ public class EnchantedTimberTest {
     static List<String> cmd(String command) {
         return on(() -> {
             List<String> out = new ArrayList<>();
-            CommandSource capture = new CommandSource() {
-                public void sendSystemMessage(Component c) { out.add(c.getString()); }
-                public boolean acceptsSuccess() { return true; }
-                public boolean acceptsFailure() { return true; }
-                public boolean shouldInformAdmins() { return false; }
-            };
+            // a proxy, not an anonymous class: plugin platforms add methods (getBukkitSender), answered by the server
+            CommandSource capture = (CommandSource) java.lang.reflect.Proxy.newProxyInstance(CommandSource.class.getClassLoader(),
+                new Class<?>[] {CommandSource.class}, (proxy, m, a) -> switch (m.getName()) {
+                    case "sendSystemMessage" -> { out.add(((Component) a[0]).getString()); yield null; }
+                    case "acceptsSuccess", "acceptsFailure" -> true;
+                    case "shouldInformAdmins" -> false;
+                    default -> m.invoke(server, a);
+                });
             server.getCommands().performPrefixedCommand(server.createCommandSourceStack().withSource(capture), command);
             return out;
         });
+    }
+
+    /** A /data get source as full SNBT ("null" when missing): Paper and Purpur cut /data get output at 128 characters. */
+    static String full(String source) {
+        cmd("data remove storage harness:full v");
+        cmd("data modify storage harness:full v set from " + source);
+        return on(() -> String.valueOf(server.getCommandStorage().get(net.minecraft.resources.Identifier.parse("harness:full")).get("v")));
     }
 
     static void explore(Path file) throws Exception {
@@ -248,6 +274,12 @@ public class EnchantedTimberTest {
     static ItemStack anvil(ItemStack left, ItemStack right) {
         return on(() -> {
             AnvilMenu m = new AnvilMenu(1, player.getInventory(), ContainerLevelAccess.create(level, player.blockPosition()));
+            // CraftBukkit builds a Bukkit view of the menu, which needs the title that openMenu would set
+            try {
+                m.getClass().getMethod("setTitle", Component.class).invoke(m, Component.literal("Repair & Name"));
+            } catch (NoSuchMethodException e) {
+                // vanilla: no title needed
+            }
             m.getSlot(0).set(left.copy());
             m.getSlot(1).set(right.copy());
             m.createResult();
@@ -298,7 +330,10 @@ class Scenarios {
     static final String ENCH = "enchanted_timber:timber";
     static final String HAS = "[minecraft:enchantments~[{enchantments:\"" + ENCH + "\"}]]";
     static final String AXE = "minecraft:iron_axe", EAXE = AXE + "[minecraft:enchantments={\"" + ENCH + "\":1}]";
-    static final String BASE = baseZip(), OLD = "file/timber-1.0.0", ADDON = "file/EnchantedTimber-1.0.0.zip";
+    // on a plugin platform run.sh passes the base's and the add-on's pack ids in -Dharness.packs
+    static final String[] PACKS = System.getProperty("harness.packs", "").split(" ");
+    static final String BASE = PACKS.length == 2 ? PACKS[0] : baseZip(), OLD = "file/timber-1.0.0",
+        ADDON = PACKS.length == 2 ? PACKS[1] : "file/EnchantedTimber-1.0.0.zip";
 
     static List<String> cmd(String c) { return EnchantedTimberTest.cmd(c); }
     static List<String> chat() { return EnchantedTimberTest.chat(); }
@@ -395,8 +430,8 @@ class Scenarios {
     }
 
     static int requiresCount() {
-        String out = cmd("data get storage timber:meta requires").toString();
-        return out.contains("Found no elements") ? -1 : out.split("Your axe needs the ", -1).length - 1;
+        String out = EnchantedTimberTest.full("storage timber:meta requires");
+        return out.equals("null") ? -1 : out.split("Your axe needs the ", -1).length - 1;
     }
 
     static boolean isWarning(String m) { return m.startsWith("✦ Enchanted Timber "); }
