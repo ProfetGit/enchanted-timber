@@ -1,109 +1,53 @@
 ![Enchanted Timber](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/banner.gif)
 
+<p align="center">
+<a href="https://github.com/ProfetGit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/github.gif" alt="GitHub" width="23.96%"></a>
+<a href="https://ko-fi.com/profetgit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/kofi.gif" alt="Ko-fi" width="23.96%"></a>
+</p>
+
 **Tree felling becomes an enchantment.**
 
-Enchanted Timber is an add-on for **[Timber](https://modrinth.com/datapack/vanilla-timber)**, the vanilla data pack for **Minecraft Java 26.2 and 26.3**. It adds a new axe enchantment, **Timber**. Only an axe that has it brings the whole tree down. Without it, an axe chops one log at a time, as in vanilla.
+An add-on for **[Timber](https://modrinth.com/datapack/vanilla-timber)** (1.1.0 or newer; install both) for **Minecraft Java 26.2 and 26.3**. It adds the **Timber** axe enchantment. Only an axe that has it brings the whole tree down; without it, you chop log by log as in vanilla. Early on you chop the hard way, later you earn the shortcut.
 
-It needs **Timber 1.1.0 or newer**. Install both.
-
-## Why this add-on?
-
-**Earn it, don't just have it.** Felling whole trees turns from a free rule into a reward. Early on you chop log by log. Later you find the enchantment and put it on your best axe.
-
-**A real vanilla enchantment.** Timber is a proper enchantment, not a renamed book or a lore line. The enchanting table offers it, librarians sell it, it turns up in chest loot and fishing, and anvils combine it like any other enchantment. The tooltip shows it by name.
-
-**Plays fair with everything else.** It works alongside Efficiency, Unbreaking, Mending, Fortune, Silk Touch and Sharpness. Timber's own rules and settings still apply on top: sneaking, durability, placed-log protection and the size limits.
-
-**One zip, server-side only.** Like Timber, it needs no mods, no resource pack, no client install and no experimental features.
-
-**Tested, not hoped.** Every release is checked by 60 automated tests on real 26.2 and 26.3 servers, running together with Timber: a simulated player chops trees with and without the enchantment, and the tests check the anvil, the enchanting table, `/enchant`, the loot and trade tags, and what happens when Timber is missing or out of date.
-
-## How to use
+![How to use](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-how-to-use.gif)
 
 1. Get the **Timber** enchantment on an axe.
 2. Chop a log of a natural tree.
 
-Sneak to take a single log instead. Timber's join hint and settings menu tell players that the enchantment is needed.
+Sneak to take a single log instead.
 
-## The enchantment
+![The enchantment](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-the-enchantment.gif)
 
-| | |
-|---|---|
-| Name | Timber |
-| Max level | I |
-| Goes on | Any axe: wood, stone, copper, iron, gold, diamond, netherite |
-| Rarity | Rare, the same as Fortune |
-| Enchanting table | Yes, at the same levels as Fortune I |
-| Librarians | Yes, as an enchanted book |
-| Loot and fishing | Yes, like other non-treasure enchantments |
-| Enchanted axe trades | Toolsmiths' and weaponsmiths' enchanted axes can come with it |
-| Combines with | Every other axe enchantment, including Efficiency, Fortune, Silk Touch and Sharpness |
+- A real vanilla enchantment for any axe, max level I, shown by name in the tooltip.
+- Found like Fortune: at the enchanting table, as a librarian's book, in chest loot and fishing, and on enchanted axes from toolsmiths and weaponsmiths.
+- Combines on the anvil with every other axe enchantment, including Efficiency, Fortune, Silk Touch and Sharpness.
+- Timber's own rules still apply on top: sneaking, durability, placed-log protection and the size limits.
 
-It can't go on pickaxes, shovels, swords or other tools, and the anvil refuses those combinations.
+Operators can try it with `/enchant @s enchanted_timber:timber`.
 
-## Commands
+![Installation](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-installation.gif)
 
-| Command | What it does |
-|---|---|
-| `/enchant @s enchanted_timber:timber` | Enchants the axe in your hand |
-| `/give @s enchanted_book[stored_enchantments={"enchanted_timber:timber":1}]` | Gives the enchanted book |
-| `/function enchanted_timber:uninstall` | Removes the add-on's scoreboards and data |
+You need **Timber 1.1.0+** and this add-on.
 
-All of Timber's commands and settings work as before. See its page.
+- **Data pack:** put both `.zip` files in your world's `datapacks` folder, then **reopen the world or restart the server**. `/reload` isn't enough, because the game only registers enchantments when a world loads.
+- **Mod:** put the `-fabric.jar` (Fabric or Quilt, needs Fabric API) or the `-forge.jar` (Forge or NeoForge) in `mods`, with Timber as a mod or a data pack.
+- **Plugin:** put the `-plugin.jar` in `plugins`, with Timber as a plugin or a data pack, and restart. On Spigot and Bukkit, restart once more.
 
-## Installation
+Removing the add-on removes the enchantment from every item the next time the world loads.
 
-You need both zips: **Timber 1.1.0+** and **Enchanted Timber**.
-
-**Singleplayer**
-- New world: under **More → Data Packs**, drag both `.zip` files into the window.
-- Existing world: put both `.zip` files in the world's `datapacks/` folder, then **close and reopen the world**.
-
-**Server:** put both `.zip` files in `world/datapacks/` and **restart the server**.
-
-Don't unzip the files.
-
-**`/reload` is not enough for this add-on.** The game registers enchantments only when a world loads. If you add the pack with `/reload`, it tells you in chat to reopen the world, and until you do, felling works without the enchantment. Timber itself keeps working the whole time.
-
-If Timber is missing or older than 1.1.0, the add-on says so in chat with a download link. Until you fix that, the enchantment does nothing.
-
-**As a mod:** both packs also come as mods for Fabric, Quilt, NeoForge and Forge. Put `EnchantedTimber-1.0.0-fabric.jar` (Fabric or Quilt, needs Fabric API) or `EnchantedTimber-1.0.0-forge.jar` (Forge or NeoForge) in the `mods` folder, together with Timber as a mod or as a data pack. A mod loads before the world does, so the enchantment is always registered and the restart note above doesn't apply. Use either the mod or the zip, not both.
-
-**As a server plugin:** both packs also come as plugins for Paper, Purpur, Spigot and Bukkit. Put `EnchantedTimber-1.0.0-plugin.jar` in the `plugins` folder, together with Timber as a plugin or as a data pack, and restart the server. On Paper and Purpur the enchantment works right away. On Spigot and Bukkit the plugin copies the pack into `world/datapacks/` when the server stops, so restart once more. Use either the plugin or the zip, not both.
-
-## Compatibility
-
-- One zip supports Minecraft Java **26.2 and 26.3**.
-- Needs **Timber 1.1.0 or newer**. With Timber 1.0.0 the enchantment does nothing, and every axe fells trees as before.
-- Everything lives in the `enchanted_timber` namespace. It adds to the vanilla `#minecraft:non_treasure` and `#minecraft:tooltip_order` enchantment tags and the `#minecraft:load` function tag, and to Timber's add-on hooks. It doesn't replace any files.
-
-## Good to know
-
-- **Removing the add-on removes the enchantment from every item.** The next time the world loads without the pack, the game strips Timber from all axes and books, because the enchantment no longer exists. Axes keep their other enchantments, and Timber books become blank enchanted books. Adding the pack back later doesn't restore them.
-- Adding or removing the pack always needs the world reopened or the server restarted.
-- The enchantment's name isn't translated, so it shows as "Timber" in every language. Resource packs can translate the key `enchantment.enchanted_timber.timber`.
-
-## Uninstall
-
-1. Run `/function enchanted_timber:uninstall`.
-2. Remove `EnchantedTimber-1.0.0.zip` from the `datapacks` folder.
-3. Reopen the world or restart the server. Timber then works without the enchantment again, and the enchantment is removed from all items (see above).
-
-Installed as a mod? Run step 1, then remove the jar from the `mods` folder and restart the game or server.
-
-Installed as a plugin? Run step 1, then remove the jar from the `plugins` folder. On Spigot and Bukkit, also delete `world/datapacks/enchanted_timber.zip`. Restart the server.
-
-## Support
+![Support](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-support.gif)
 
 Enchanted Timber is free. If it saves you some chopping, a coffee helps fund the next update.
 
 [![Support me on Ko-fi](https://raw.githubusercontent.com/ProfetGit/assets/main/kofi-banner.gif)](https://ko-fi.com/profetgit)
 
-## License
+![License](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-license.gif)
 
 © 2026 Profet. All rights reserved.
 
-- **You can** use Enchanted Timber on any server, including monetized ones, and include the unmodified zip in any modpack that credits Profet and links here. You can also feature it in videos and modify it for your own world or server.
-- **Please don't** re-upload Enchanted Timber or a modified version of it elsewhere, sell it, or present it as your own.
+- **You can** use Enchanted Timber on any server, including monetized ones, include it in modpacks that credit Profet and link here, feature it in videos and modify it for your own world or server.
+- **Please don't** re-upload it or a modified version, sell it, or present it as your own.
 
-The full terms are in the `LICENSE` file inside the zip. For anything else, just ask.
+Full terms: [LICENSE](https://github.com/ProfetGit/enchanted-timber/blob/main/LICENSE).
+
+![](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/divider.gif)
