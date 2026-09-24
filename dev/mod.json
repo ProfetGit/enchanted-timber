@@ -1,0 +1,16 @@
+{
+  "id": "enchanted_timber",
+  "name": "Enchanted Timber",
+  "summary": "Tree felling becomes an enchantment. An add-on for Timber.",
+  "slug": "enchanted-timber",
+  "repo": "ProfetGit/enchanted-timber",
+  "recommends": {
+    "vanilla_timber": "1.1.0"
+  },
+  "smoke": [
+    {
+      "command": "scoreboard players get #problem enchanted_timber.data",
+      "expect": "#problem has 0 \\[enchanted_timber\\.data\\]"
+    }
+  ]
+}
