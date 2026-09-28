@@ -389,10 +389,10 @@ class Scenarios {
 
     static void hold(String spec) { cmd("item replace entity TimberTester weapon.mainhand with " + spec); }
 
-    /** Chops the bottom log; returns logs left standing one tick later. */
+    /** Chops the bottom log; returns logs left standing two ticks later (Timber 1.3.2 puts the displayed blocks back for the chop tick). */
     static int chop() throws Exception {
         EnchantedTimberTest.destroy(p(0, 0, 0));
-        ticks(1);
+        ticks(2);
         return logs();
     }
 
