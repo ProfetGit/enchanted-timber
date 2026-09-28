@@ -9,6 +9,8 @@
 
 An add-on for **[Timber](https://modrinth.com/datapack/vanilla-timber)** (1.1.0 or newer; install both) for **Minecraft Java 26.2 and 26.3**. It adds the **Timber** axe enchantment. Only an axe that has it brings the whole tree down; without it, you chop log by log as in vanilla. Early on you chop the hard way, later you earn the shortcut.
 
+<p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0Weoh9g9vsg" title="Timber trailer" frameborder="0" allowfullscreen></iframe></p>
+
 ![How to use](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-how-to-use.gif)
 
 1. Get the **Timber** enchantment on an axe.
