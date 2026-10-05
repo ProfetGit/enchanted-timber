@@ -39,6 +39,57 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class EnchantedTimberTest {
+
+    /** Entity tags: entityTags() in 26.x, getTags() before. */
+    @SuppressWarnings("unchecked")
+    static java.util.Set<String> tagsOf(net.minecraft.world.entity.Entity e) {
+        try {
+            return (java.util.Set<String>) e.getClass().getMethod("entityTags").invoke(e);
+        } catch (ReflectiveOperationException ex) {
+            try {
+                return (java.util.Set<String>) e.getClass().getMethod("getTags").invoke(e);
+            } catch (ReflectiveOperationException ex2) {
+                throw new RuntimeException(ex2);
+            }
+        }
+    }
+
+    /** A sound's id: location() in 26.x, getLocation() before. */
+    static Object soundId(net.minecraft.sounds.SoundEvent s) {
+        try {
+            return s.getClass().getMethod("location").invoke(s);
+        } catch (ReflectiveOperationException e) {
+            try {
+                return s.getClass().getMethod("getLocation").invoke(s);
+            } catch (ReflectiveOperationException e2) {
+                throw new RuntimeException(e2);
+            }
+        }
+    }
+
+    /** Game rule names: snake_case from 1.21.11, camelCase before. */
+    static String rule(String snake) {
+        boolean legacy = String.join(" ", cmd("gamerule doTileDrops")).contains("currently set");
+        if (!legacy) return snake;
+        StringBuilder b = new StringBuilder();
+        boolean up = false;
+        for (char c : snake.toCharArray()) {
+            if (c == '_') up = true;
+            else {
+                b.append(up ? Character.toUpperCase(c) : c);
+                up = false;
+            }
+        }
+        String camel = b.toString();
+        return switch (snake) {
+            case "block_drops" -> "doTileDrops";
+            case "max_command_sequence_length" -> "maxCommandChainLength";
+            case "max_block_modifications" -> "commandModificationBlockLimit";
+            case "mob_griefing" -> "mobGriefing";
+            case "do_tile_drops" -> "doTileDrops";
+            default -> camel;
+        };
+    }
     static MinecraftServer server;
     static ServerLevel level;
     static ServerPlayer player;
@@ -239,7 +290,7 @@ public class EnchantedTimberTest {
     static boolean felling() {
         return on(() -> {
             for (net.minecraft.world.entity.Entity e : level.getAllEntities())
-                if (e.entityTags().stream().anyMatch(g -> g.equals("timber.d") || g.equals("timber.ctl") || g.equals("timber.job") || g.equals("timber.m"))) return true;
+                if (EnchantedTimberTest.tagsOf(e).stream().anyMatch(g -> g.equals("timber.d") || g.equals("timber.ctl") || g.equals("timber.job") || g.equals("timber.m"))) return true;
             return false;
         });
     }
@@ -248,7 +299,7 @@ public class EnchantedTimberTest {
         return on(() -> {
             int n = 0;
             for (net.minecraft.world.entity.Entity e : level.getAllEntities())
-                if (e instanceof net.minecraft.world.entity.Display.BlockDisplay && e.entityTags().contains("timber.d")) n++;
+                if (e instanceof net.minecraft.world.entity.Display.BlockDisplay && EnchantedTimberTest.tagsOf(e).contains("timber.d")) n++;
             return n;
         });
     }
@@ -319,6 +370,21 @@ public class EnchantedTimberTest {
         }
     }
 
+    static String addonZip() {
+        try (var s = Files.list(Path.of("world/datapacks"))) {
+            return "file/" + s.map(f -> f.getFileName().toString()).filter(n -> n.startsWith("EnchantedTimber-") && n.endsWith(".zip")).findFirst().orElseThrow();
+        } catch (java.io.IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** Tool tiers of this release: copper tools came with 1.21.9. */
+    static String[] tiers() {
+        boolean copper = net.minecraft.core.registries.BuiltInRegistries.ITEM.stream().anyMatch(i -> String.valueOf(i).contains("copper_pickaxe"));
+        return copper ? new String[] {"wooden", "stone", "copper", "golden", "iron", "diamond", "netherite"}
+            : new String[] {"wooden", "stone", "golden", "iron", "diamond", "netherite"};
+    }
+
     static void info(String msg) {
         System.out.println("[INFO] " + msg);
     }
@@ -333,7 +399,7 @@ class Scenarios {
     // on a plugin platform run.sh passes the base's and the add-on's pack ids in -Dharness.packs
     static final String[] PACKS = System.getProperty("harness.packs", "").split(" ");
     static final String BASE = PACKS.length == 2 ? PACKS[0] : baseZip(), OLD = "file/timber-1.0.0",
-        ADDON = PACKS.length == 2 ? PACKS[1] : "file/EnchantedTimber-1.0.0.zip";
+        ADDON = PACKS.length == 2 ? PACKS[1] : EnchantedTimberTest.addonZip();
 
     static List<String> cmd(String c) { return EnchantedTimberTest.cmd(c); }
     static List<String> chat() { return EnchantedTimberTest.chat(); }
@@ -445,8 +511,8 @@ class Scenarios {
     static void run() throws Exception {
         EnchantedTimberTest.spawnPlayer();
         cmd("forceload add 0 0 127 63");
-        cmd("gamerule random_tick_speed 0");
-        cmd("gamerule block_drops true");
+        cmd("gamerule " + EnchantedTimberTest.rule("random_tick_speed") + " 0");
+        cmd("gamerule " + EnchantedTimberTest.rule("block_drops") + " true");
         cmd("gamemode survival TimberTester");
         ticks(80);
         pack("disable", OLD);
@@ -490,7 +556,7 @@ class Scenarios {
         check("every log drops, axe pays 1 durability per log", dropped() == n && damage() == n && mainhandIs("*" + HAS),
             "dropped " + dropped() + " of " + n + ", " + held());
 
-        for (String a : new String[] {"wooden", "stone", "copper", "golden", "iron", "diamond", "netherite"}) {
+        for (String a : EnchantedTimberTest.tiers()) {
             hold("minecraft:" + a + "_axe");
             en = cmd("enchant TimberTester " + ENCH);
             if (!mainhandIs("minecraft:" + a + "_axe" + HAS)) check("/enchant on " + a + " axe", false, en.toString());

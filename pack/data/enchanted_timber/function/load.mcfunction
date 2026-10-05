@@ -1,4 +1,4 @@
-data modify storage enchanted_timber:meta version set value "1.0.0"
+data modify storage enchanted_timber:meta version set value "1.0.1"
 scoreboard objectives add enchanted_timber.data dummy
 scoreboard objectives add enchanted_timber.left minecraft.custom:minecraft.leave_game
 scoreboard players set #registered enchanted_timber.data 0

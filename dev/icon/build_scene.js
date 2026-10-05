@@ -10,7 +10,7 @@
 // used up (poof), the axe flashes; act 2 is Timber's icon, shifted by SHIFT: chop, the tree falls, poofs, drops, regrows.
 var VM = (function () {
   const fs = require('fs');
-  const DIR = '/home/emppu/Projects/Minecraft Datapacks/EnchantedTimber/dev/icon/';
+  const DIR = '/home/emppu/Projects/Minecraft Datapacks/packs/EnchantedTimber/dev/icon/';
   const TEX = DIR + 'sprites/';
   const FPS = 25, DT = 1 / FPS, SHIFT = 0.72, LEN = 3.2 + SHIFT;
   const CAM_POS = [0, 60, 104], CAM_TARGET = [0, 16, 0], CAM_PAN = [-14, 7.5, 0], CAM_ZOOM = 0.25;

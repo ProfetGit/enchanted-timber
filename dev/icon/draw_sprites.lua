@@ -1,9 +1,9 @@
 -- Enchanted Timber icon sprites. Run through the aseprite MCP: dofile("<abs>/EnchantedTimber/dev/icon/draw_sprites.lua")
 -- Timber's tree, axe and FX and Enchanted Veinminer's book, runes and violet FX (same author), plus the axe's flash and glint.
 dofile("/home/emppu/Projects/Minecraft Datapacks/.claude/skills/pack-icon-animation/assets/pixel_art.lua")
-local OUT = "/home/emppu/Projects/Minecraft Datapacks/EnchantedTimber/dev/icon/sprites/"
-local TB = "/home/emppu/Projects/Minecraft Datapacks/Timber/dev/icon/sprites/"
-local EV = "/home/emppu/Projects/Minecraft Datapacks/EnchantedVeinminer/dev/icon/sprites/"
+local OUT = "/home/emppu/Projects/Minecraft Datapacks/packs/EnchantedTimber/dev/icon/sprites/"
+local TB = "/home/emppu/Projects/Minecraft Datapacks/packs/Timber/dev/icon/sprites/"
+local EV = "/home/emppu/Projects/Minecraft Datapacks/packs/EnchantedVeinminer/dev/icon/sprites/"
 local pc = app.pixelColor
 local GLINT_EDGE, GLINT_CORE = "#C866FF", "#F6C8FF"
 
