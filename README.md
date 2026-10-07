@@ -1,8 +1,8 @@
-![Enchanted Timber](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/banner.gif)
+![Enchanted Timber](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/banner.webp)
 
 <p align="center">
-<a href="https://github.com/ProfetGit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/github.gif" alt="GitHub" width="23.96%"></a>
-<a href="https://ko-fi.com/profetgit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/kofi.gif" alt="Ko-fi" width="23.96%"></a>
+<a href="https://github.com/ProfetGit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/github.webp" alt="GitHub" width="23.96%"></a>
+<a href="https://ko-fi.com/profetgit"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/buttons/kofi.webp" alt="Ko-fi" width="23.96%"></a>
 </p>
 
 **Tree felling becomes an enchantment.**
@@ -11,14 +11,14 @@ An add-on for **[Timber](https://www.curseforge.com/minecraft/mc-mods/profets-ti
 
 <p align="center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0Weoh9g9vsg" title="Timber trailer" frameborder="0" allowfullscreen></iframe></p>
 
-![How to use](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-how-to-use.gif)
+![How to use](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-how-to-use.webp)
 
 1. Get the **Timber** enchantment on an axe.
 2. Chop a log of a natural tree.
 
 Sneak to take a single log instead.
 
-![The enchantment](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-the-enchantment.gif)
+![The enchantment](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-the-enchantment.webp)
 
 - A real vanilla enchantment for any axe, max level I, shown by name in the tooltip.
 - Found like Fortune: at the enchanting table, as a librarian's book, in chest loot and fishing, and on enchanted axes from toolsmiths and weaponsmiths.
@@ -27,7 +27,7 @@ Sneak to take a single log instead.
 
 Operators can try it with `/enchant @s enchanted_timber:timber`.
 
-![Installation](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-installation.gif)
+![Installation](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-installation.webp)
 
 You need **Timber 1.1.0+** and this add-on.
 
@@ -37,28 +37,28 @@ You need **Timber 1.1.0+** and this add-on.
 
 Removing the add-on removes the enchantment from every item the next time the world loads.
 
-![More from Profet](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-more-from-profet.gif)
+![More from Profet](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-more-from-profet.webp)
 
 <!-- promo:start -->
 <p align="center">
-<a href="https://www.curseforge.com/minecraft/mc-mods/tidy-pockets"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/tidy-pockets.gif" alt="Tidy Pockets: One click. All sorted. Client side." width="49%"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/having-a-blast"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/having-a-blast.gif" alt="Having a Blast: One boom. Bouncy blocks. Client or server." width="49%"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/far-out-zoom"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/far-out-zoom.gif" alt="Far Out Zoom: The horizon, up close. Client side." width="49%"></a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/travelers-lantern"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/travelers-lantern.gif" alt="Traveler's Lantern: Your light. Hands free. Client or server." width="49%"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/tidy-pockets"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/tidy-pockets.webp" alt="Tidy Pockets: One click. All sorted. Client side." width="49%"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/having-a-blast"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/having-a-blast.webp" alt="Having a Blast: One boom. Bouncy blocks. Client or server." width="49%"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/far-out-zoom"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/far-out-zoom.webp" alt="Far Out Zoom: The horizon, up close. Client side." width="49%"></a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/travelers-lantern"><img src="https://raw.githubusercontent.com/ProfetGit/assets/main/promo/travelers-lantern.webp" alt="Traveler's Lantern: Your light. Hands free. Client or server." width="49%"></a>
 </p>
 <!-- promo:end -->
 
-![Support](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-support.gif)
+![Support](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-support.webp)
 
 Enchanted Timber is free. If it saves you some chopping, a coffee helps fund the next update.
 
-[![Support me on Ko-fi](https://raw.githubusercontent.com/ProfetGit/assets/main/kofi-banner.gif)](https://ko-fi.com/profetgit)
+[![Support me on Ko-fi](https://raw.githubusercontent.com/ProfetGit/assets/main/kofi-banner.webp)](https://ko-fi.com/profetgit)
 
 Want your own server to play on with friends? My BisectHosting affiliate link gives you 25% off the first month, and I get a small commission.
 
-[![Get 25% off your first month at BisectHosting](https://raw.githubusercontent.com/ProfetGit/assets/main/bisecthosting-banner.gif)](https://url-shortener.curseforge.com/Pp2BN)
+[![Get 25% off your first month at BisectHosting](https://raw.githubusercontent.com/ProfetGit/assets/main/bisecthosting-banner.webp)](https://url-shortener.curseforge.com/Pp2BN)
 
-![License](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-license.gif)
+![License](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-license.webp)
 
 © 2026 Profet. All rights reserved.
 
@@ -67,4 +67,4 @@ Want your own server to play on with friends? My BisectHosting affiliate link gi
 
 Full terms: [LICENSE](https://github.com/ProfetGit/enchanted-timber/blob/main/LICENSE).
 
-![](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/divider.gif)
+![](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/divider.webp)
