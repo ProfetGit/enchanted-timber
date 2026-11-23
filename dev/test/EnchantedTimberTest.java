@@ -635,6 +635,7 @@ class Scenarios {
 
         // 5. Timber's join hint and menu
         chat();
+        cmd("scoreboard players set #welcome timber.config 1");
         cmd("execute as TimberTester run function timber:player/welcome");
         List<String> hello = chat();
         info("welcome: " + hello);
@@ -644,7 +645,7 @@ class Scenarios {
         cmd("execute as TimberTester run function timber:settings");
         List<String> menu = chat();
         for (String m : menu) info("menu| " + m);
-        check("settings menu says the enchantment is needed", menu.size() == 13 && menu.get(1).contains("Your axe needs the Timber enchantment."),
+        check("settings menu says the enchantment is needed", menu.size() == 14 && menu.get(1).contains("Your axe needs the Timber enchantment."),
             menu.size() + " lines");
 
         // 6. /reload keeps everything
