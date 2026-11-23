@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.2 — 2026-11-23
+- Now also runs on Minecraft Java 26.1.2, as a data pack zip and a Fabric/Quilt and a Forge/NeoForge mod jar. Nothing changes on the other versions.
+
 ## 1.0.1 — 2026-09-30
 - Now also runs on Minecraft Java 1.21.1, 1.21.4, 1.21.8 and 1.21.11, as a data pack zip and a Fabric/Quilt mod jar for each of them. Nothing changes on 26.2 and 26.3.
 
