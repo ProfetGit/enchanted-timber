@@ -37,6 +37,8 @@ You need **Timber 1.1.0+** and this add-on.
 
 Removing the add-on removes the enchantment from every item the next time the world loads.
 
+Enchanted Timber is not on Modrinth and can't be listed there. Download it from [CurseForge](https://www.curseforge.com/minecraft/mc-mods/enchanted-timber) or [GitHub](https://github.com/ProfetGit/enchanted-timber).
+
 ![More from Profet](https://raw.githubusercontent.com/ProfetGit/enchanted-timber/main/docs/desc/title-more-from-profet.webp)
 
 <!-- promo:start -->
